@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
 
@@ -75,19 +74,10 @@ export default function Navbar() {
           All Games
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 group-hover:w-full transition-all"></span>
         </Link>
-        <div className="relative group">
-          <button className="text-red-900/50 font-bold hover:text-red-600 transition-colors">
-            Categories
-          </button>
-          <div className="absolute top-full left-0 bg-white shadow-lg rounded-md hidden group-hover:block min-w-[150px]">
-            {/* ADDED 'text-red-600' TO ALL DROPDOWN LINKS */}
-            <Link href="/category/action" className="block px-4 py-2 text-red-600 hover:bg-gray-100">Action</Link>
-            <Link href="/category/adventure" className="block px-4 py-2 text-red-600 hover:bg-gray-100">Adventure</Link>
-            <Link href="/category/rpg" className="block px-4 py-2 text-red-600 hover:bg-gray-100">RPG</Link>
-            <Link href="/category/shooter" className="block px-4 py-2 text-red-600 hover:bg-gray-100">Shooter</Link>
-            <Link href="/category/strategy" className="block px-4 py-2 text-red-600 hover:bg-gray-100">Strategy</Link>
-            <Link href="/category/sports" className="block px-4 py-2 text-red-600 hover:bg-gray-100">Sports</Link></div>
-        </div>
+        <Link href="/explore" className="text-red-900/50 font-bold hover:text-red-600 transition-colors relative group">
+          Explore
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 group-hover:w-full transition-all"></span>
+        </Link>
         <Link href="/latest" className="text-red-900/50 font-bold hover:text-red-600 transition-colors relative group">
           Latest Releases
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 group-hover:w-full transition-all"></span>
@@ -96,7 +86,7 @@ export default function Navbar() {
 
       {/* Sidebar */}
 
-      
+
           <div
         className={`fixed top-0 left-0 w-72 h-full bg-[#111] text-white z-50 transition-transform duration-300 shadow-2xl ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -123,7 +113,6 @@ export default function Navbar() {
           </form>
 
           <nav className="space-y-2">
-            {/* Other Links */}
             <Link href="/" onClick={toggleSidebar} className="flex items-center gap-3 px-4 py-3 hover:bg-white/5 hover:text-red-600 transition-all border-l-2 border-transparent hover:border-red-600 hover:pl-5">
               <Home size={20} /> Home
             </Link>
@@ -134,47 +123,10 @@ export default function Navbar() {
               <Gamepad2 size={20} /> Request Games
             </Link>
 
-            {/* Categories Section */}
-            <div className="flex flex-col">
-              <button
-                onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-                className="flex items-center justify-between w-full px-4 py-3 hover:bg-white/5 hover:text-red-600 transition-all border-l-2 border-transparent hover:border-red-600 hover:pl-5 font-medium text-white"
-              >
-                <div className="flex items-center gap-3">
-                  <Grid size={20} /> Categories
-                </div>
-                <span
-                  className={`transform transition-transform duration-300 ${
-                    isCategoryOpen ? 'rotate-180' : 'rotate-0'
-                  }`}
-                >
-                  ▼
-                </span>
-              </button>
+            <Link href="/explore" onClick={toggleSidebar} className="flex items-center gap-3 px-4 py-3 hover:bg-white/5 hover:text-red-600 transition-all border-l-2 border-transparent hover:border-red-600 hover:pl-5">
+              <Grid size={20} /> Explore
+            </Link>
 
-              <div className={`flex flex-col ml-4 mt-1 space-y-1 ${isCategoryOpen ? 'block' : 'hidden'}`}>
-                <Link href="/category/action" onClick={toggleSidebar} className="block px-4 py-2 hover:bg-white/10 text-red-600 rounded text-sm">
-                  Action
-                </Link>
-                <Link href="/category/adventure" onClick={toggleSidebar} className="block px-4 py-2 hover:bg-white/10 text-red-600 rounded text-sm">
-                  Adventure
-                </Link>
-                <Link href="/category/rpg" onClick={toggleSidebar} className="block px-4 py-2 hover:bg-white/10 text-red-600 rounded text-sm">
-                  RPG
-                </Link>
-                <Link href="/category/shooter" onClick={toggleSidebar} className="block px-4 py-2 hover:bg-white/10 text-red-600 rounded text-sm">
-                  Shooter
-                </Link>
-                <Link href="/category/strategy" onClick={toggleSidebar} className="block px-4 py-2 hover:bg-white/10 text-red-600 rounded text-sm">
-                  Strategy
-                </Link>
-                <Link href="/category/sports" onClick={toggleSidebar} className="block px-4 py-2 hover:bg-white/10 text-red-600 rounded text-sm">
-                  Sports
-                </Link>
-              </div>
-            </div>
-
-            {/* Remaining Links */}
             <Link href="/popular" onClick={toggleSidebar} className="flex items-center gap-3 px-4 py-3 hover:bg-white/5 hover:text-red-600 transition-all border-l-2 border-transparent hover:border-red-600 hover:pl-5">
               <Star size={20} /> Popular
             </Link>
